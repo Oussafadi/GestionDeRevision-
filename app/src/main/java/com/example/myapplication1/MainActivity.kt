@@ -1,7 +1,9 @@
 package com.example.myapplication1
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -10,6 +12,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //sohaib test
+        val bt_matiere= findViewById<Button>(R.id.bt_matiere)
+        bt_matiere.setOnClickListener {
+            val intoaddmatiere=Intent(this,MatiereActivity::class.java)
+            startActivity(intoaddmatiere)
+        }
+
+
+
+        //test
+
         val recyclerView : RecyclerView =findViewById(R.id.rv_revision)
         // linear layout manager
         val layoutManager = LinearLayoutManager(this)
