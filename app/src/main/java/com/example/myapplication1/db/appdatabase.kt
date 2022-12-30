@@ -29,6 +29,7 @@ class appdatabase(
             CREATE TABLE revisions(
                 id integer PRIMARY KEY,
                 id_matiere integer references matieres(id),
+                name varchar(50),
                 date date,
                 hour integer,
                 nbr_hour integer,
@@ -49,7 +50,7 @@ class appdatabase(
     fun addMatiere(matiere:Matiere): Boolean {
         val db = this.writableDatabase
         val values= ContentValues()
-        values.put("name",matiere.name)
+        values.put("name",matiere.name.uppercase())
         val res=db.insert("matieres",null,values).toInt()
 
         db.close()
@@ -59,7 +60,7 @@ class appdatabase(
     fun getAllMatiere():ArrayList<Matiere>{
         val db = this.readableDatabase
         val listres = ArrayList<Matiere>()
-        val res = db.rawQuery("select * from matieres",null)
+        val res = db.query("matieres",null,null,null,null,null,"name")
         while(res.moveToNext()){
             listres.add(Matiere(res.getInt(0),res.getString(1)))
         }
@@ -69,8 +70,9 @@ class appdatabase(
 
     fun deleteMatiere(id:Int): Boolean{
         val db = this.writableDatabase
-        val res1 =db.delete("revisions","where id_matiere=$id",null)
-        val res2 =db.delete("matieres","where id=$id",null)
+        val res1 =db.delete("revisions","id_matiere=$id",null)
+        val res2 =db.delete("matieres","id=$id",null)
+        db.close()
         return res2==1
 
     }
@@ -78,8 +80,15 @@ class appdatabase(
     fun updateMatiere(matiere:Matiere): Boolean{
         val db = this.readableDatabase
         val values= ContentValues()
-        values.put("name",matiere.name)
-        val res = db.update("matieres",values,"where id=${matiere.id}",null)
+        values.put("name",matiere.name.uppercase())
+        var res=0
+        try {
+            res = db.update("matieres",values,"id=${matiere.id}",null)
+        }catch (e:Exception){
+            res=-1
+        }
+
+        db.close()
         return res != -1
     }
 
@@ -89,7 +98,7 @@ class appdatabase(
         val selectionargs= arrayOf(id.toString())
         val res = db.query("revisions",null,"id_matiere=?",selectionargs,null,null,"date , hour")
         while(res.moveToNext()){
-            listres.add(Revision(res.getInt(0),res.getInt(1),Date.valueOf(res.getString(2)),res.getInt(3),res.getInt(4),res.getInt(5)))
+            listres.add(Revision(res.getInt(0),res.getInt(1),res.getString(2),Date(res.getLong(3)),res.getInt(4),res.getInt(5),res.getInt(6)))
         }
 
         db.close()
@@ -99,10 +108,10 @@ class appdatabase(
     fun findRevisionByDate(date: Date):ArrayList<Revision>{
         val db = this.readableDatabase
         val listres = ArrayList<Revision>()
-        val selectionargs= arrayOf(date.toString())
+        val selectionargs= arrayOf(date.time.toString())
         val res = db.query("revisions",null,"date=?",selectionargs,null,null,"hour")
         while(res.moveToNext()){
-            listres.add(Revision(res.getInt(0),res.getInt(1),Date.valueOf(res.getString(2)),res.getInt(3),res.getInt(4),res.getInt(5)))
+            listres.add(Revision(res.getInt(0),res.getInt(1),res.getString(2),Date(res.getLong(3)),res.getInt(4),res.getInt(5),res.getInt(6)))
         }
 
         db.close()
@@ -121,7 +130,8 @@ class appdatabase(
         val db = this.writableDatabase
         val values= ContentValues()
         values.put("id_matiere",revision.id_matiere)
-        values.put("date",revision.date.toString())
+        values.put("name",revision.name)
+        values.put("date",revision.date.time)
         values.put("hour",revision.hour)
         values.put("nbr_hour",revision.nbr_hour)
         values.put("status",revision.status)
@@ -136,6 +146,7 @@ class appdatabase(
         val db = this.readableDatabase
         val values= ContentValues()
         values.put("id_matiere",revision.id_matiere)
+        values.put("name",revision.name)
         values.put("date",revision.date.toString())
         values.put("hour",revision.hour)
         values.put("nbr_hour",revision.nbr_hour)

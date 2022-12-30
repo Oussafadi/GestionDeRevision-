@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2AC8BC"
+    android:background="@color/white"
     tools:context=".AddMatiere">
 
     <EditText
         android:id="@+id/tvname_matiere"
         android:layout_width="251dp"
         android:layout_height="57dp"
-        android:background="#A1F3A3"
+        android:background="@color/purple_700"
         android:ems="10"
         android:hint="name"
         android:inputType="textPersonName"
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:text="ADD"
+        android:text="save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
