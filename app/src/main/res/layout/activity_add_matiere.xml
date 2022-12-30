@@ -11,6 +11,7 @@
         android:id="@+id/tvname_matiere"
         android:layout_width="251dp"
         android:layout_height="57dp"
+        android:layout_marginTop="50dp"
         android:background="@color/purple_700"
         android:ems="10"
         android:hint="name"
