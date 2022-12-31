@@ -12,16 +12,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //sohaib test
-        val bt_matiere= findViewById<Button>(R.id.bt_matiere)
-        bt_matiere.setOnClickListener {
-            val intoaddmatiere=Intent(this,MatiereActivity::class.java)
-            startActivity(intoaddmatiere)
-        }
-
-
-
-        //test
+//        //sohaib test
+//        val bt_matiere= findViewById<Button>(R.id.bt_matiere)
+//        bt_matiere.setOnClickListener {
+//            val intoaddmatiere=Intent(this,MatiereActivity::class.java)
+//            startActivity(intoaddmatiere)
+//        }
+//
+//
+//
+//        //test
 
         val recyclerView : RecyclerView =findViewById(R.id.rv_revision)
         // linear layout manager
