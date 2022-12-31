@@ -53,8 +53,7 @@ class MatiereAdapter(
             builder.setMessage("Etes-vous sur de vouloire supprimer cette Matiere ?")
             builder.setPositiveButton("Oui"){dialogIterface,id ->
                 db.deleteMatiere(matiere.id)
-                data_matlist= db.getAllMatiere()
-                notifyDataSetChanged()
+                refrech()
             }
             builder.setNegativeButton("Non"){dialogIterface,id ->
                 dialogIterface.dismiss()
@@ -63,13 +62,20 @@ class MatiereAdapter(
             alert.show()
         }
         holder.bt_edit.setOnClickListener {
-            startActivity(mcontext,Intent(mcontext,AddMatiere::class.java)
-                .putExtra("id",matiere.id)
-                .putExtra("name",matiere.name)
-                .putExtra("color",matiere.color),null)
+
+            val dialogMatiere=DialogMatiere(mcontext)
+            dialogMatiere.createdialog(matiere.id,matiere.name,matiere.color,this)
+//            startActivity(mcontext,Intent(mcontext,AddMatiere::class.java)
+//                .putExtra("id",matiere.id)
+//                .putExtra("name",matiere.name)
+//                .putExtra("color",matiere.color),null)
         }
 
 
+    }
+    fun refrech(){
+        data_matlist= db.getAllMatiere()
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
