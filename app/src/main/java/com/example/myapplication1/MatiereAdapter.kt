@@ -1,8 +1,10 @@
 package com.example.myapplication1
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +12,10 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication1.data.ColorList
 import com.example.myapplication1.data.Matiere
 import com.example.myapplication1.db.appdatabase
 
@@ -40,15 +44,29 @@ class MatiereAdapter(
     override fun onBindViewHolder(holder: MatiereViewHolder, position: Int) {
         val matiere=data_matlist.get(position)
         holder.tvname.text=matiere.name
+        holder.tvname.setTextColor(Color.parseColor("#000000"))
+        holder.container.setBackgroundColor(Color.parseColor(ColorList().basicColors()[matiere.color].hexHash))
+
         holder.bt_delete.setOnClickListener{
-            db.deleteMatiere(matiere.id)
-            data_matlist= db.getAllMatiere()
-            notifyDataSetChanged()
+            val builder =AlertDialog.Builder(mcontext)
+            builder.setTitle("Delete Matiere")
+            builder.setMessage("Etes-vous sur de vouloire supprimer cette Matiere ?")
+            builder.setPositiveButton("Oui"){dialogIterface,id ->
+                db.deleteMatiere(matiere.id)
+                data_matlist= db.getAllMatiere()
+                notifyDataSetChanged()
+            }
+            builder.setNegativeButton("Non"){dialogIterface,id ->
+                dialogIterface.dismiss()
+            }
+            val alert=builder.create()
+            alert.show()
         }
         holder.bt_edit.setOnClickListener {
             startActivity(mcontext,Intent(mcontext,AddMatiere::class.java)
                 .putExtra("id",matiere.id)
-                .putExtra("name",matiere.name),null)
+                .putExtra("name",matiere.name)
+                .putExtra("color",matiere.color),null)
         }
 
 
@@ -63,4 +81,5 @@ class MatiereViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
     var tvname=itemView.findViewById<TextView>(R.id.tv_matiere_name)
     var bt_edit=itemView.findViewById<Button>(R.id.bt_edit_matiere)
     var bt_delete=itemView.findViewById<Button>(R.id.bt_delete_matiere)
+    var container=itemView.findViewById<ConstraintLayout>(R.id.matiere_container)
 }

@@ -22,7 +22,8 @@ class appdatabase(
         val createTableMatieres= """
             CREATE TABLE matieres(
                 id integer PRIMARY KEY,
-                name varchar(50) unique
+                name varchar(50) unique,
+                color integer
             )
         """.trimIndent()
         val createTableRevisions="""
@@ -51,6 +52,7 @@ class appdatabase(
         val db = this.writableDatabase
         val values= ContentValues()
         values.put("name",matiere.name.uppercase())
+        values.put("color",matiere.color)
         val res=db.insert("matieres",null,values).toInt()
 
         db.close()
@@ -60,9 +62,9 @@ class appdatabase(
     fun getAllMatiere():ArrayList<Matiere>{
         val db = this.readableDatabase
         val listres = ArrayList<Matiere>()
-        val res = db.query("matieres",null,null,null,null,null,"name")
+        val res = db.query("matieres",null,null,null,null,null,"color , name")
         while(res.moveToNext()){
-            listres.add(Matiere(res.getInt(0),res.getString(1)))
+            listres.add(Matiere(res.getInt(0),res.getString(1),res.getInt(2)))
         }
         db.close()
         return listres
@@ -81,6 +83,7 @@ class appdatabase(
         val db = this.readableDatabase
         val values= ContentValues()
         values.put("name",matiere.name.uppercase())
+        values.put("color",matiere.color)
         var res=0
         try {
             res = db.update("matieres",values,"id=${matiere.id}",null)
