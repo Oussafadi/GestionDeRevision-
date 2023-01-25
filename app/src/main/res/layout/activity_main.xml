@@ -6,12 +6,71 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rv_revision"
+        >
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/previous"
+            android:textSize="30sp"
+            android:backgroundTint="#9A08B3"
+            android:onClick="SemainePrecedante"
+            />
+
+        <TextView
+            android:id="@+id/tv_MonthYear"
+            android:layout_width="0dp"
+            android:text=" Jan 2023"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:textSize="30sp"
+            android:backgroundTint="#9A08B3"
+            android:onClick="SemaineProchaine"
+            />
+
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_revision"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <Button
+        android:id="@+id/bt_matiere"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" Mes matieres"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 <!--    <Button-->
 <!--        android:id="@+id/bt_matiere"-->
