@@ -11,3 +11,12 @@ data class Revision(
     var nbr_hour: Int,
     var status : Int
  )
+{
+    public fun finiOuPas(): Boolean {
+        if ( status == 1) {
+            return true
+        }else{
+            return false
+        }
+    }
+}
