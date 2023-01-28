@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.stat -> {
-//mazal mat9adat 3la lah t9ad mn b3d
+//mazala mat9adat 3la lah t9ad mn b3d
                 }
 
             }
