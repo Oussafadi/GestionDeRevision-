@@ -1,5 +1,6 @@
 package com.example.myapplication1
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -7,9 +8,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -26,15 +30,35 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        findViewById<BottomNavigationView>(R.id.bottomNavigationView).setOnItemSelectedListener(
+            NavigationBarView.OnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.home -> {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
 
-            //        sohaib test
-                    val bt_matiere= findViewById<Button>(R.id.bt_matiere)
+                }
+                R.id.add -> {
+                    val intent = Intent(this, MatiereActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.stat -> {
+//mazal mat9adat
+                }
+
+            }
+            false
+        })
+
+
+        //        sohaib test
+                   /* val bt_matiere= findViewById<Button>(R.id.bt_matiere)
                      bt_matiere.setOnClickListener {
                        val intoaddmatiere=Intent(this,MatiereActivity::class.java)
                         startActivity(intoaddmatiere)
                    }
             //        test
-
+*/
          Date = LocalDate.now()
          findViews()
          setAllViews()
@@ -103,6 +127,7 @@ class MainActivity : AppCompatActivity() {
         setAllViews()
     }
 
+    @SuppressLint("SuspiciousIndentation")
     @RequiresApi(Build.VERSION_CODES.O)
     public fun SemainePrecedante(view : View) {
      Date = Date.minusWeeks(1)

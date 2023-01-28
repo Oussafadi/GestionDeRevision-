@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication1.data.ColorList
 import com.example.myapplication1.data.Matiere
 import com.example.myapplication1.db.appdatabase
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 
 class MatiereActivity : AppCompatActivity() {
 
@@ -26,8 +28,25 @@ class MatiereActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_matiere)
         db=appdatabase(this)
+        findViewById<BottomNavigationView>(R.id.bottomNavigationView).setOnItemSelectedListener(
+            NavigationBarView.OnItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.home -> {
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
 
+                    }
+                    R.id.add -> {
+                        val intent = Intent(this, MatiereActivity::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.stat -> {
+//mazal mat9adat
+                    }
 
+                }
+                false
+            })
 
 
         listMatieres=findViewById<RecyclerView>(R.id.listMatieres)
