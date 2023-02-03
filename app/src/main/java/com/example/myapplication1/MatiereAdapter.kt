@@ -65,10 +65,6 @@ class MatiereAdapter(
 
             val dialogMatiere=DialogMatiere(mcontext)
             dialogMatiere.createdialog(matiere.id,matiere.name,matiere.color,this)
-//            startActivity(mcontext,Intent(mcontext,AddMatiere::class.java)
-//                .putExtra("id",matiere.id)
-//                .putExtra("name",matiere.name)
-//                .putExtra("color",matiere.color),null)
         }
 
 

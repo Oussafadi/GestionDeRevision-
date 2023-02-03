@@ -20,20 +20,10 @@ class ColorList
     fun basicColors(): List<ColorObject>
     {
         return listOf(
-            ColorObject("Green", "00FF00", whiteHex),
-            ColorObject("Orange", "FF9800", blackHex),
-            ColorObject("Yellow", "FFFF00", blackHex),
-            ColorObject("Gray", "808080", whiteHex),
-//            ColorObject("Maroon", "800000", whiteHex),
-//            ColorObject("Red", "FF0000", whiteHex),
-//            ColorObject("Fuchsia", "FF00FF", whiteHex),
-//            ColorObject("Green", "008000", whiteHex),
-//            ColorObject("Lime", "00FF00", blackHex),
-//            ColorObject("Olive", "808000", whiteHex),
-//            ColorObject("Navy", "000080", whiteHex),
-//            ColorObject("Blue", "0000FF", whiteHex),
-//            ColorObject("Teal", "008080", whiteHex),
-//            ColorObject("Aqua", "00FFFF", blackHex)
+            ColorObject("Très Important", "F44336"),
+            ColorObject("Important", "FFEB3B"),
+            ColorObject("Peu Important", "8BC34A"),
+            ColorObject("Neutre", "BDBDBD"),
         )
     }
 }

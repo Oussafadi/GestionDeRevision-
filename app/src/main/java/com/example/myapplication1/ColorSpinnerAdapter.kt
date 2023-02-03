@@ -35,15 +35,12 @@ class ColorSpinnerAdapter(context: Context, list : List<ColorObject>)
         val colorObject : ColorObject = getItem(position) ?: return view
 
         val colorNameItem = view.findViewById<TextView>(R.id.colorName)
-        val colorHexItem = view.findViewById<TextView>(R.id.colorHex)
         val colorNameBG = view.findViewById<TextView>(R.id.colorNameBG)
         val colorBlob = view.findViewById<View>(R.id.colorBlob)
 
-        colorNameBG?.text = colorObject.name
-        colorNameBG?.setTextColor(Color.parseColor(colorObject.contrastHexHash))
+        colorNameBG?.text = "Color"
 
         colorNameItem?.text = colorObject.name
-        colorHexItem?.text = colorObject.hex
 
         colorBlob?.background?.setTint(Color.parseColor(colorObject.hexHash))
 
